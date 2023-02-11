@@ -1,0 +1,2 @@
+class AssetsMovement < ApplicationRecord
+end

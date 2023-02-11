@@ -1,0 +1,67 @@
+
+<div class="row">
+  <h1>Worley IT-Assets</h1>
+  <p style="color: green"><%= notice %></p>
+  <h4>Search</h4>
+  <%= render 'ransack' %>
+</div>
+<div class="col">
+  <div class="bs-component">
+  <%= link_to 'New it_asset', new_it_asset_path, :class => "btn btn-primary" %>
+    <%= will_paginate @it_assets, :class => "page-item" %>
+  </div>
+  <br>  
+    <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Serial</th>
+        <th>Asset Type</th>
+        <th>Model</th>
+        <th>Owner</th>
+        <th>Status</th>
+        <th>Зассан</th>
+        <th>Бүртгэсэн</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @it_assets.each do |it_asset| %>
+        <tr>
+          <td><%= it_asset.id %></td>
+          <td><%= link_to it_asset.serial_number, it_asset %></td>
+          <td><%= it_asset.asset_type %></td>
+          <td><%= it_asset.name %></td>
+          <% owner = user_info(it_asset.owner) %>
+          <td>
+            <% if owner.present? %>
+              <%= link_to owner.email, show_user_path(:user_id => owner.id) %>
+            <% else %>
+              <p>not found owner</p>
+            <% end %>
+          </td>
+          <td><%= it_asset.status %></td>
+          <td>
+            <% edited_user = user_info(it_asset.edited_by) %>
+            <%= edited_user ? edited_user.email : "not found" %>
+          </td>
+          <td>
+            <% created_user = user_info(it_asset.registered_by) %>
+            <%= created_user ? created_user.email : "not found" %>
+          </td>
+          <% if current_user && (current_user.admin? || current_user.super_admin?) %>
+            <td><%= link_to 'Edit', edit_it_asset_path(it_asset), :class => "btn btn-success" %></td>
+            <td>
+                <%= link_to 'Destroy', it_asset, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+            </td>
+          <% else %>
+            <td colspan="2"></td>
+          <% end %>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  </div>

@@ -1,0 +1,13 @@
+
+<%= search_form_for @q do |f| %>
+    <%= f.label :email_cont %>
+    <%= f.search_field :email_cont %>
+    <%= f.label :position_eq %><br>
+    <%= f.select(:position_eq, options_for_select(User.positions.map {|k, v| [k.humanize.capitalize, v] }, f.object.position_eq), {include_blank: true}) %>
+    <br>
+
+    <%= f.label :status_eq %><br>
+    <%= f.select(:status_eq, options_for_select(User.statuses.map {|k, v| [k.humanize.capitalize, v]}, f.object.status_eq), { include_blank: true }) %>
+    <br>
+    <%= f.submit("Search", :class => "btn btn-primary") %>
+<% end %>

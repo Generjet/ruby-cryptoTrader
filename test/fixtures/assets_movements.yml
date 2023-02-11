@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  it_asset: MyString
+  from_who: 1
+  to_who: 1
+  registered_by: 1
+  edited_by: 1
+
+two:
+  it_asset: MyString
+  from_who: 1
+  to_who: 1
+  registered_by: 1
+  edited_by: 1

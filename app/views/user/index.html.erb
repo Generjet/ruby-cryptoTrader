@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Worley Mongolia workers</h1>
+<%= link_to 'New user', new_user_registration_path, :class => "btn btn-primary" %>
+
+<div class="row">
+  <div class="col-md-9">
+    <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>email</th>
+        <th>role</th>
+        <th>SAP</th>
+        <th>position</th>
+        <th>department</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= link_to user.email, show_user_path(:user_id => user.id) %></td>
+          <td><%= user.role %></td>
+          <td><%= user.sap_id %></td>
+          <td><%= user.position %></td>
+          <td><%= user.department %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="bs-component">
+    <%= will_paginate @users, :class => "page-item" %>
+  </div>
+  <br>  
+  </div>
+  <div class="col-md-3">
+    <h4>Search</h4>
+    <%= render 'ransack' %>
+  </div>
+</div>

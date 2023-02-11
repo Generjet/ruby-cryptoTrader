@@ -1,0 +1,10 @@
+
+<%= search_form_for @q do |f| %>
+    <%= f.search_field :serial_number_cont, :placeholder => "Serial number contains?" %>
+    <%= f.search_field :name_cont, :placeholder => "Model name" %>
+    <%= f.search_field :detail_cont, :placeholder => "Comment contained" %>
+
+    <%= f.label :status_eq %>
+    <%= f.select(:status_eq, options_for_select(ItAsset.statuses.map {|k, v| [k.humanize.capitalize, v]}, f.object.status_eq), { include_blank: true }) %>
+    <%= f.submit("Search", :class => "btn btn-primary") %>
+<% end %>

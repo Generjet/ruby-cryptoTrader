@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  surname: MyString
+  email: MyString
+  position: MyString
+  department: MyString
+  dockingStation: MyString
+  desktopModel: MyString
+  desktopSerial: MyString
+  laptop: MyString
+  laptopSerial: MyString
+  monitor1: MyString
+  monitor2: MyString
+  monitor3: MyString
+  location: MyString
+  comment: MyString
+  sap_id: 1
+
+two:
+  name: MyString
+  surname: MyString
+  email: MyString
+  position: MyString
+  department: MyString
+  dockingStation: MyString
+  desktopModel: MyString
+  desktopSerial: MyString
+  laptop: MyString
+  laptopSerial: MyString
+  monitor1: MyString
+  monitor2: MyString
+  monitor3: MyString
+  location: MyString
+  comment: MyString
+  sap_id: 1

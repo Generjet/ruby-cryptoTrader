@@ -1,0 +1,19 @@
+<div id="<%= dom_id assets_movement %>">
+  <p>
+    <strong>It asset:</strong>
+    <%= assets_movement.serial_number %>
+  </p>
+
+  <p>
+  <% giver = find_by_sap(assets_movement.from_who) %>
+  <strong>From:</strong>
+    <%= giver.email %>
+  </p>
+
+  <p>
+  <% taker = find_by_sap(assets_movement.to_who) %>
+    <strong>To:</strong>
+    <%= taker.name %>
+  </p>
+
+</div>

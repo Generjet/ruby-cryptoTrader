@@ -1,0 +1,49 @@
+<%= search_form_for @q do |f| %>
+    <%= f.label :serial_number_cont %>
+    <%= f.search_field :serial_number_cont %>
+    <%= f.label :name_cont %>
+    <%= f.search_field :name_cont %>
+
+    <%= f.label :detail_cont %>
+    <%= f.search_field :detail_cont %>
+
+    <%= f.label :status_eq %><br>
+    <%= f.select(:status_eq, options_for_select(ItAsset.statuses.map {|k, v| [k.humanize.capitalize, v]}, f.object.status_eq), { include_blank: true }) %>
+    <%= f.submit("Search", :class => "btn btn-primary") %>
+<% end %>
+
+<div class="bs-component">
+<%= will_paginate @it_assets, :class => "page-item" %>
+</div>
+
+<table class="table table-hover" >
+<thead>
+    <tr>
+        <th>Serial</th>
+        <th>Type</th>
+        <th>Model</th>
+        <th>SAP | email (owner)</th>
+        <th>Status</th>
+    </tr>
+</thead>
+
+<tbody>
+    <% @it_assets.each do |it_asset| %>
+    <tr>
+        <td><%= it_asset.serial_number %></td>
+        <td><%= it_asset.asset_type %></td>
+        <td><%= it_asset.name %></td>
+         <% owner = user_info(it_asset.owner_id) %>
+        <td>
+            <% if owner.present? %>
+                <%= owner.sap_id %> |
+                <%= link_to owner.email, show_user_path(:user_id => owner.id) %>
+            <% else %>
+                <p>not found owner</p>
+            <% end %>
+        </td>
+        <td><%= it_asset.status %></td>
+    </tr>
+    <% end %>
+</tbody>
+</table>

@@ -1,0 +1,82 @@
+# ==== Create or update ======
+1. Model.where(column_name: value).first_or_create.update(other_column_name: some_value)
+
+2. m = Model.where(column_name: value).first_or_initialize
+m.other_column_name = some_value
+m.save
+
+=====
+@shuttle = Shuttle.where(
+      name: params[:name],
+      time: DateTime.now.beginning_of_day..DateTime.now.end_of_day
+    ).first_or_initialize do |s|
+  s.attribute = value
+  s.save
+end
+
+
+3. Another 
+
+@shuttle = Shuttle.where('name= ? AND time BETWEEN ? AND ?', params[:name], DateTime.now.beginning_of_day, DateTime.now.end_of_day).first
+@shuttle.columnname = "new value"
+@shuttle.save
+If you are doing multiple
+
+@shuttles = Shuttle.where('name= ? AND time BETWEEN ? AND ?', params[:name], DateTime.now.beginning_of_day, DateTime.now.end_of_day)
+@shuttles.each do |shuttle|
+  shuttle.columnname = "new value"
+  shuttle.save
+end
+
+4. Example
+
+Occasionally, we have a big data to be imported to our databases rather than adding data entry through forms. So, we use csv files to get that data to different tables in databases.
+
+By default, CSV parser is in-built in rails. All you have to do is require 'csv' in the file where you want to use it.
+
+I would suggest to use background job while importing data as data can be huge to handle and the request will be kept on waiting until it completes.
+
+CSV file path
+First, we have to get the file path:
+
+def csv_file_path
+  # give url to csv file
+  @csv_file_path ||= File.read("https://...")
+end
+
+ Initialise csv
+Now that we have a path of the file to be read. Now parse this file so that we can use that data to import:
+
+def csv
+  @csv ||= CSV.parse(csv_file_path, col_sep: ",", row_sep: :auto, skip_blanks: true)
+end
+So, we call the path method and parse the file explaining that the data in the file will be using the separator , and separator of rows auto and skip the row if blank.
+
+We can also call csv.count now to check the number of rows in the file.
+
+Import Data
+Let’s assume my file contains two columns, i.e., name, and email of the subscribers and I want to add to the user specified list the subscribers.
+
+CSV file
+CSV file
+I have user model which has many lists and I have subscriber model which has many lists as well. Now list has many subscribers through list_subscriber model.
+
+csv.each_with_index do |row, index|
+  next if index == 0 # skip headers
+  subscriber = Subscriber.find_or_initialize_by(email: row[1])
+  subscriber.name = row[0]
+  next unless subscriber.valid? # skip if subscriber data is invalid
+  imported_subscriber << {name: subscriber.name, email: subscriber.email}
+end
+
+# save imported students
+imported_subscriber_ids = Subscriber.upsert_all(imported_subscribers, returning: %w[id], unique_by: :email)
+
+if imported_subscrriber_ids.present?
+  # update list with imported subscribers
+  list_subscribers = imported_subscriber_ids.map { |id| {subscriber_id: id["id"], list_id: list_id} }
+  imported_list_subscribers = ListSubscriber.upsert_all(list_subscribers, returning: %w[id], unique_by: :index_list_subscribers_on_list_id_and_subscriber_id)
+end
+And viola! The contacts will be imported now. The upsert_all method is built in Rails 6 will import the data in one call and unique_by will stop any duplicated row to create.
+
+As list_subscriber has a unique index on listId and subscriberId, so we can use the name of index direct by calling index_list_subscribers_on_list_id_and_subscriber_id otherwise uniq_by only works with columns having unique index.

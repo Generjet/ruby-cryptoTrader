@@ -1,0 +1,4 @@
+1. add to package.json
+scripts": { "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets" }
+
+2.

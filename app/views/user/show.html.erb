@@ -1,0 +1,31 @@
+<h3>User information</h3>
+Email: <%= @user.email %>
+Owner assets: 
+<% assets = owned_assets(@user.id)%>
+<% if assets.present? %>
+    <div class="table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Model Name</th>
+                <th>Serial number</th>
+                <th>Asset type</th>
+                <th>status</th>
+                <th>registered_by</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% assets.each do |a| %>
+                <tr>
+                    <td><%= link_to a.name, a %></td>
+                    <td><%= a.serial_number %></td>
+                    <td><%= a.asset_type %></td>
+                    <td><%= a.status %></td>
+                    <td><%= a.registered_by %></td>
+                </tr>
+            <% end %>
+        <tbody>
+    </table>
+    </div>
+
+<% end %>

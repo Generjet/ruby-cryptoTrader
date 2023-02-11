@@ -1,0 +1,6 @@
+<h3>CSV update</h3>
+
+<%= form_with url: import_it_assets_path, method: :post do |form| %>
+    <%= form.file_field :file %>
+    <%= form.button "Import" %>
+<% end %>

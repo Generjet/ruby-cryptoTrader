@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @assets_owner %>
+
+<div>
+  <%= link_to "Edit this assets owner", edit_assets_owner_path(@assets_owner) %> |
+  <%= link_to "Back to assets owners", assets_owners_path %>
+
+  <%= button_to "Destroy this assets owner", @assets_owner, method: :delete %>
+</div>

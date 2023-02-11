@@ -1,0 +1,45 @@
+<div id="<%= dom_id it_asset %>">
+  <p>
+    <strong>Name:</strong>
+    <%= it_asset.name %>
+  </p>
+
+  <p>
+    <strong>Detail:</strong>
+    <%= it_asset.detail %>
+  </p>
+
+  <p>
+    <strong>Serial number:</strong>
+    <%= it_asset.serial_number %>
+  </p>
+
+  <p>
+    <strong>Asset type:</strong>
+    <%= it_asset.asset_type %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= it_asset.status %>
+  </p>
+
+  <p>
+    <strong>Owner:</strong>
+    <% owner = user_info(it_asset.owner) %>
+    <%= owner.present? ? owner.email : "Not found"  %>
+  </p>
+
+  <p>
+    <strong>Registered by:</strong>
+    <% created_user = user_info(it_asset.registered_by)%>
+    <%= created_user ? created_user.email : "not found" %>
+  </p>
+
+  <p>
+    <strong>Edited by:</strong>
+    <% edited_user = user_info(it_asset.edited_by) %>
+    <%= edited_user ? edited_user.email : "not found" %>
+  </p>
+
+</div>

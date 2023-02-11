@@ -1,0 +1,97 @@
+<%= form_with(model: assets_owner) do |form| %>
+  <% if assets_owner.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(assets_owner.errors.count, "error") %> prohibited this assets_owner from being saved:</h2>
+
+      <ul>
+        <% assets_owner.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :surname, style: "display: block" %>
+    <%= form.text_field :surname %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :position, style: "display: block" %>
+    <%= form.text_field :position %>
+  </div>
+
+  <div>
+    <%= form.label :department, style: "display: block" %>
+    <%= form.text_field :department %>
+  </div>
+
+  <div>
+    <%= form.label :dockingStation, style: "display: block" %>
+    <%= form.text_field :dockingStation %>
+  </div>
+
+  <div>
+    <%= form.label :desktopModel, style: "display: block" %>
+    <%= form.text_field :desktopModel %>
+  </div>
+
+  <div>
+    <%= form.label :desktopSerial, style: "display: block" %>
+    <%= form.text_field :desktopSerial %>
+  </div>
+
+  <div>
+    <%= form.label :laptop, style: "display: block" %>
+    <%= form.text_field :laptop %>
+  </div>
+
+  <div>
+    <%= form.label :laptopSerial, style: "display: block" %>
+    <%= form.text_field :laptopSerial %>
+  </div>
+
+  <div>
+    <%= form.label :monitor1, style: "display: block" %>
+    <%= form.text_field :monitor1 %>
+  </div>
+
+  <div>
+    <%= form.label :monitor2, style: "display: block" %>
+    <%= form.text_field :monitor2 %>
+  </div>
+
+  <div>
+    <%= form.label :monitor3, style: "display: block" %>
+    <%= form.text_field :monitor3 %>
+  </div>
+
+  <div>
+    <%= form.label :location, style: "display: block" %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div>
+    <%= form.label :comment, style: "display: block" %>
+    <%= form.text_field :comment %>
+  </div>
+
+  <div>
+    <%= form.label :sap_id, style: "display: block" %>
+    <%= form.number_field :sap_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

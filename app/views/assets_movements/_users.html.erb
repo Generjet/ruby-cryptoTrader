@@ -1,0 +1,21 @@
+<div class="bs-component">
+    <%= will_paginate @users, :class => "page-item" %>
+</div>
+<table class="table table-hover" >
+    <thead>
+    <tr>
+        <th>email</th>
+        <th>SAP</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= link_to user.email, show_user_path(:user_id => user.id) %></td>
+            <td><%= user.sap_id %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+

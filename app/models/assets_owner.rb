@@ -1,0 +1,2 @@
+class AssetsOwner < ApplicationRecord
+end

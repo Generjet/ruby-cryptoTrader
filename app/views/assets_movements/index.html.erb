@@ -1,0 +1,51 @@
+<div class="row">
+  <p style="color: green"><%= notice %></p>
+
+  <h1>Assets movements</h1>
+  <div class="col-md-3">
+    <h4>Search</h4>
+    <%= render "ransack" %>
+  </div>
+  <%= link_to "New assets movement", new_assets_movement_path %>
+  =========================================
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>serial</th>
+        <th>Model</th>
+        <th>FROM</th>
+        <th>TO</th>
+        <th>when</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @assets_movements.each do |assets_movement| %>
+        <tr>
+          <td><%= assets_movement.id %></td>
+          <% asset = find_asset(assets_movement.serial_number) %>
+          <td><%= link_to asset.serial_number, assets_movement %></td>
+          
+          <td><%= asset.name %></td>
+          <% giver = find_by_sap(assets_movement.from_who) %>
+          <td><%= giver.email %></td>
+          <% taker = find_by_sap(assets_movement.to_who) %>
+          <td><%= taker.email %> </td>
+          <td><%= assets_movement.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="bs-component">
+    <%= will_paginate @assets_movements, :class => "page-item" %>
+  </div>
+  <br>  
+  </div>
+
+</div>

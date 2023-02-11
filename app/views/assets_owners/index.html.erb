@@ -1,0 +1,52 @@
+<div class="row">
+  <h1>Worley IT-Assets-Owners</h1>
+  <p style="color: green"><%= notice %></p>
+  <h4>Search</h4>
+</div>
+<div class="col">
+  <div class="bs-component">
+  <%= render "upload_csv" %>
+  <%= link_to 'New assets_owners', new_assets_owner_path, :class => "btn btn-primary" %>
+    <%= will_paginate @assets_owners, :class => "page-item" %>
+  </div>
+  <br>  
+    <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>dockingStation</th>
+        <th>desktop</th>
+        <th>laptop</th>
+        <th>monitor1</th>
+        <th>monitor2</th>
+        <th>monitor3</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @assets_owners.each do |assets_owners| %>
+        <tr>
+          <td><%= assets_owners.id %></td>
+          <td><%= link_to assets_owners.name, assets_owners %></td>
+          <td><%= assets_owners.surname %></td>
+          <td><%= assets_owners.email %></td>
+          <td><%= assets_owners.dockingStation %> </td>
+          <td><%= assets_owners.desktopSerial %></td>
+          <td><%= assets_owners.laptopSerial %></td>
+          <td><%= assets_owners.monitor1 %></td>
+          <td><%= assets_owners.monitor2 %></td>
+          <td><%= assets_owners.monitor3 %></td>
+          <td><%= link_to 'Edit', edit_assets_owner_path(assets_owners), :class => "btn btn-success" %></td>
+          <td>
+              <%= link_to 'Destroy', assets_owners, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  </div>

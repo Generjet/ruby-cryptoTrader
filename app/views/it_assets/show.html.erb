@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @it_asset %>
+
+<div>
+  <%= link_to "Edit this it asset", edit_it_asset_path(@it_asset) %> |
+  <%= link_to "Back to it assets", it_assets_path %>
+
+  <%= button_to "Destroy this it asset", @it_asset, method: :delete %>
+</div>

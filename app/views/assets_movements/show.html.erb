@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @assets_movement %>
+
+<div>
+  <%= link_to "Edit this assets movement", edit_assets_movement_path(@assets_movement) %> |
+  <%= link_to "Back to assets movements", assets_movements_path %>
+
+  <%= button_to "Destroy this assets movement", @assets_movement, method: :delete %>
+</div>

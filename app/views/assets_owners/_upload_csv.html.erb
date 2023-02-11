@@ -1,0 +1,6 @@
+<h3>CSV 2023</h3>
+
+<%= form_with url: upload_csv_assets_owners_path, method: :post do |form| %>
+    <%= form.file_field :file %>
+    <%= form.button "Import" %>
+<% end %>
